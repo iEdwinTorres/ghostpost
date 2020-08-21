@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="nav">
+            <a id="links" href="/">Recent</a> |
+            <a id="links" href="/sortbyvotes/">Popular</a> |
+            <a id="links" href="/boasts/">Boasts</a> |
+            <a id="links" href="/roasts/">Roasts</a> |
+            <a id="links" href="/create_post/">Post</a>
+        </div>
+
+        <h1 id="headline">{{ headline }} &#128123;</h1>
+
+        {% for posts in boast %} {% if posts.choices %}
+        <div id="card">
+            <h2 id="boast-or-roast">Boast</h2>
+            <h3 id="vote-count">
+                {{ posts.totalvotes }} Votes
+            </h3>
+            <br />
+            <br />
+            <div id="post">{{ posts.user_post }}</div>
+            <div id="bottom-elements">
+                <div id="date">
+                    {{ posts.timeposted }}
+                </div>
+                <div id="vote-buttons">
+                    <button id="upvote">
+                        <a id="icon" href="/upvotes/{{posts.id}}">&#11014;</a>
+                    </button>
+                    <button id="downvote">
+                        <a id="icon" href="/downvotes/{{posts.id}}">&#11015;</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% endif %} {% endfor %}
+    </body>
+</html>
